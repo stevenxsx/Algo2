@@ -18,8 +18,8 @@ public class ChocolateAgency {
         for (int i = 0; i < size; i++) {
             b[i] = sc.nextInt();
         }
-
         System.out.println(choccy(s, b, 0,size));
+
 
     }
 
