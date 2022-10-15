@@ -37,7 +37,13 @@ public class ManhattanTourists {
         //System.out.println(Arrays.deepToString(m));
 
     }
-
+    /**
+     * Recurrence: opt (i,j) =  { 0              -> if i = 0 and j = 0
+     *                          { vi + opt(i-1,0)-> if i > 0 and j = 0
+     *                          { vj + opt(0,j-1)-> if j > 0 and i = 0
+     *                          { max of { vi + opt(i-1,j)
+     *                                   { vj + opt(i,j-1)
+     */
     public int tourism(int i, int j) {
         if (m[i][j] != -1) {
             return m[i][j]; //Utilize memoization.
@@ -58,13 +64,7 @@ public class ManhattanTourists {
         return m[i][j];
     }
 
-    /**
-     * Recurrence: opt (i,j) =  { 0              -> if i = 0 and j = 0
-     *                          { vi + opt(i-1,0)-> if i > 0 and j = 0
-     *                          { vj + opt(0,j-1)-> if j > 0 and i = 0
-     *                          { max of { vi + opt(i-1,j)
-     *                                   { vj + opt(i,j-1)
-     */
+
 
     public static void main(String[] args) {
         new ManhattanTourists().run();
