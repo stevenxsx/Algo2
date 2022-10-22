@@ -5,14 +5,20 @@ public class SequenceAlignment {
         new SequenceAlignment().run();
     }
 
+    final int d = 1; //Delta (gap penalty)
+    int m;
+    int n;
+    int[][] memo;
+    String x;
+    String y;
+
     public void run() {
         Scanner sc = new Scanner(System.in);
-        final int d = 1; //Delta (gap penalty)
-        String x = sc.nextLine(); //String X
-        String y = sc.nextLine(); //String Y
-        int m = x.length(); //Length m of x
-        int n = y.length(); //Length n of y
-        int[][] memo = new int[m+1][n+1];
+        x = sc.nextLine(); //String X
+        y = sc.nextLine(); //String Y
+        m = x.length(); //Length m of x
+        n = y.length(); //Length n of y
+        memo = new int[m+1][n+1];
         for (int i = 0; i < m; i++) {
             memo[i][0] = i*d;
         }
@@ -22,14 +28,14 @@ public class SequenceAlignment {
 
         for (int j = 1; j <= n; j++) {
             for (int i = 1; i <= m; i++) {
-                align(i,j);
+                opt(i,j);
             }
         }
         System.out.println(memo[m][n]);
 
     }
 
-    public void align(int x, int y) {
+    public int opt(int i, int j) {
         /**
          * Recurrence:
          * (I)   (m,n) in M; OR
@@ -37,6 +43,7 @@ public class SequenceAlignment {
          * (III) the n'th position of Y is not matched
          *
          * opt(I,J) = minimum cost of alignment between x1,x2,...xI and y1,y2,...yJ
+         *
          * if (I) holds, we pay axMyN and then align substring x1,x2,...xM-1 as well as possible with y1,y2,...yN-1.
          * We get opt(m,n) = axMyN + opt(m-1,n-1).
          *
@@ -47,8 +54,17 @@ public class SequenceAlignment {
          * Similarly, with case (III), we get opt(m,n) = δ + opt(m,n-1)
          */
 
+        if (true /*case 1*/) {
+            memo[i][j] = mismatchCost(x.charAt(i),y.charAt(j)) + opt(m-1,n-1);
+            return memo[i][j];
+        }
 
 
+
+
+        memo[i][j] = Math.min(Math.min(1,2),3);
+
+    return -1;
 
     }
 
